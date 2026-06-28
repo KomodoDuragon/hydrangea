@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maaf :(</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffeef2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4"%3%3Cpath fill="%23ffc0cb" fill-opacity="0.4" d="M1 3h1v1H1V3zm2-2h1v1H2V1z"%3E%3C/path%3E%3C/svg%3E');
+        }
+
+        /* Tampilan Awal untuk Paksa Klik (Bypass Kebijakan Chrome) */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffeef2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .splash-btn {
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background-color: #ff5e7e;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 94, 126, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .splash-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 50px 50px 40px 50px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.6);
+            max-width: 420px;
+            width: 90%;
+            position: relative;
+            border: 2px solid #ffc0cb;
+            display: none; /* Sembunyikan utama sebelum di-klik */
+        }
+
+        /* Tombol Kontrol Audio yang Jelas dan Mudah Dilihat */
+        .audio-control-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff5e7e;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 10px rgba(255, 94, 126, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .audio-control-btn:hover {
+            transform: scale(1.05);
+            background-color: #e04d6a;
+        }
+
+        .emoji-container {
+            font-size: 65px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .custom-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 180px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: #ff5e7e;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        p {
+            color: #777;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            position: relative;
+            height: 55px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 17px;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        #btn-yes {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        #btn-yes:hover {
+            transform: scale(1.05);
+            background-color: #45a049;
+        }
+
+        #btn-no {
+            background-color: #f44336;
+            color: white;
+        }
+
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="splash-screen">
+        <button class="splash-btn" onclick="bukaWeb()">Tolong buka, ini dari Dedwan</button>
+    </div>
+
+    <audio id="music-ask" loop prefetch="auto">
+        <source src="dan.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="music-happy" loop prefetch="auto">
+        <source src="raisa.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container" id="main-content">
+        <button class="audio-control-btn" id="btn-audio" onclick="toggleAudio()">
+            <span id="audio-icon">🔊</span> <span id="audio-text">Mute</span>
+        </button>
+
+        <div class="emoji-container" id="emoji">🥺👉👈</div>
+
+        <img src="please.gif" alt="Foto/GIF Pilihanmu" class="custom-image" id="display-img">
+
+        <h1 style="font-size: 20px; margin-bottom: 5px;">Dear Yomi,</h1>
+        <h1 id="question">Aku minta maaf, boleh minta kita baikan?</h1>
+        <p id="sub-text">Soal kemarin aku emang salah. Aku minta maaf. Aku cukup bodoh dan lalai dan aku sudah sangat belajar dari kesalahanku, I regret it so much and it will never happen again. Aku mengharapkan luasnya samudra pengampunanmu</p>
+
+        <div class="btn-group">
+            <button id="btn-yes" onclick="maafDiterima()">Maafin</button>
+            <button id="btn-no" onmouseover="kabur()" onclick="kabur()">Nggak</button>
+        </div>
+    </div>
+
+    <script>
+        const splashScreen = document.getElementById('splash-screen');
+        const mainContent = document.getElementById('main-content');
+        const btnNo = document.getElementById('btn-no');
+        const btnAudio = document.getElementById('btn-audio');
+        const audioIcon = document.getElementById('audio-icon');
+        const audioText = document.getElementById('audio-text');
+        const question = document.getElementById('question');
+        const subText = document.getElementById('sub-text');
+        const emoji = document.getElementById('emoji');
+        const btnYes = document.getElementById('btn-yes');
+        const displayImg = document.getElementById('display-img');
+
+        const musicAsk = document.getElementById('music-ask');
+        const musicHappy = document.getElementById('music-happy');
+
+        let noCount = 0;
+
+        musicAsk.volume = 0.5;
+        musicHappy.volume = 0.5;
+
+        // ==================== CONFIG GOOGLE FORM (DENGAN FORM-ENCODED) ====================
+        const GFORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSc64uj0_m0Fy7lSlQ9i7tn4-GS_XnH_K1w8f6uW0-q1cDS1nw/formResponse"; 
+        const ENTRY_COUNT = "entry.507662991";  
+        const ENTRY_STATUS = "entry.983944630"; 
+
+        function kirimLogKeGoogleSheets(statusPilihan) {
+            // Menggunakan URLSearchParams agar format data sesuai dengan form html murni (lolos filter browser)
+            const params = new URLSearchParams();
+            params.append(ENTRY_COUNT, noCount);
+            params.append(ENTRY_STATUS, statusPilihan);
+
+            fetch(GFORM_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params.toString()
+            }).catch(e => console.log("Gagal sinkronisasi log:", e));
+        }
+        // ===============================================================================
+
+        function bukaWeb() {
+            splashScreen.style.opacity = 0;
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+                mainContent.style.display = 'block';
+                musicAsk.play().catch(e => console.log("Gagal memutar lagu pertama:", e));
+                kirimLogKeGoogleSheets("Membuka halaman utama");
+            }, 500);
+        }
+
+        function toggleAudio() {
+            if (musicAsk.muted || musicHappy.muted) {
+                musicAsk.muted = false;
+                musicHappy.muted = false;
+                audioIcon.innerHTML = "🔊";
+                audioText.innerHTML = "Mute";
+                btnAudio.style.backgroundColor = "#ff5e7e";
+            } else {
+                musicAsk.muted = true;
+                musicHappy.muted = true;
+                audioIcon.innerHTML = "🔇";
+                audioText.innerHTML = "Unmute";
+                btnAudio.style.backgroundColor = "#777777";
+            }
+        }
+
+        function kabur() {
+            noCount++; 
+
+            if (btnNo.style.position !== 'fixed') {
+                btnNo.style.position = 'fixed';
+            }
+
+            if (noCount <= 2) {
+                emoji.innerHTML = "🥺 beneran ga mau?";
+            } else if (noCount <= 5) {
+                emoji.innerHTML = "😭 yah, kok dicoba terus...";
+            } else if (noCount <= 8) {
+                emoji.innerHTML = "💔 tega banget wkwk";
+            } else {
+                emoji.innerHTML = `🏃‍♂️ Menghindar ${noCount}x!`;
+            }
+
+            const padding = 60;
+            const maxX = window.innerWidth - btnNo.offsetWidth - padding;
+            const maxY = window.innerHeight - btnNo.offsetHeight - padding;
+
+            const x = Math.random() * (maxX - padding) + padding;
+            const y = Math.random() * (maxY - padding) + padding;
+
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+        }
+
+        function maafDiterima() {
+            question.innerHTML = "Terimakasih ya Yomi. ✨🥰✨";
+
+            if (noCount > 0) {
+                subText.innerHTML = `Meskipun tadi sempat mencoba menolak sebanyak <b>${noCount} kali</b>, makasih banyak ya udah mau baikan. I wish you nothing but the best lah.`;
+            } else {
+                subText.innerHTML = "Lansung dimaafin tanpa ragu? Makasih banyak ya! Dengan ini kita berteman kembali, I wish you nothing but the best lah.";
+            }
+
+            emoji.innerHTML = "🥳🎉✨";
+            displayImg.src = "gatto.gif";
+
+            btnNo.style.display = 'none';
+            btnYes.style.display = 'none';
+
+            musicAsk.pause();
+
+            setTimeout(() => {
+                musicHappy.play().catch(e => console.log("Gagal play lagu kedua:", e));
+            }, 100);
+
+            // Mengirim data final saat Yomi menekan tombol "Maafin"
+            kirimLogKeGoogleSheets("Dimaafkan!");
+        }
+    </script>
+</body>
+</html>
